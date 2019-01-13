@@ -2,8 +2,10 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 
+
 bot.on('message', function(message, arendaId, password){
-  let userMessage = message.content.split(' ');
+  const messageUser = message.member.user.username;
+  let userMessage = message.content.split(' ')
   let callSmashBot = userMessage[0];
   let command = userMessage[1];
 
@@ -11,7 +13,7 @@ bot.on('message', function(message, arendaId, password){
     if (userMessage.length >= 2) { // Detects command input after calling smash bot
       arenaCommand();
     } else {
-      // if message is only '!smash bot' respond with instructions on how to use smash bot
+      // if message is only '!smash' respond with instructions on how to use smash bot
       message.channel.send('Smash bot instructions');
     }
   }
@@ -22,6 +24,11 @@ bot.on('message', function(message, arendaId, password){
       if (userMessage.length == 4) {
         arena = userMessage[2];
         pw = userMessage[3];
+        // if (arena.length > 5) {
+        //   message.channel.send(`You didn't use enough characters in your arena [ID] dufus`);
+        // } else if (arena.length < 5) {
+        //   message.channel.send(`Too many characters in your arena [ID] bozo`);
+        // }
         message.channel.send(`Arena created!\nArenaID: ${arena}\nPassword: ${pw}`);
       } else if (userMessage.length > 4) {
         message.channel.send('Too many values, human! I only need the arena [ID] followed by the [Password] when creating an arena');
