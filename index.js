@@ -38,13 +38,18 @@ bot.on('message', function(message){
         } else if (specialChar.test(password) || isNaN(password)){
           message.channel.send(`Invalid [Password]! Passwords can only be numbers genius!`)
         } else {
-          arenas.push({messageUser: {arena: arena, password: password}});
-          message.channel.send(`\n${messageUser}'s created an arena:\n\n[ArenaID]: ${arena}\nPassword: ${password}`);
+          arenas.push({user: messageUser, arena: arena, password: password});
+          message.channel.send(`\n${messageUser}'s created an arena:\n\n[ArenaID]: ${arena}\n[Password]: ${password}`);
         }
       } else if (userMessage.length > 4) {
         message.channel.send('Too many values, human! I only need the arena [ID] followed by the [Password] when creating an arena');
-      } else if (userMessage.length == 3) {
+      } else if (userMessage.length == 3 && userMessage[2] != 'show' && userMessage[2].length == 5) {
         message.channel.send('No password detected! If you wish to not have a password, enter \'open\' as your [Password]');
+      } else if (userMessage.length == 3 && userMessage[2] == 'show') {
+        message.channel.send('Current arena(s) open:');
+        arenas.map(arena => {
+          message.channel.send(`\n${arena.user}'s arena:\n\n[ArenaID]: ${arena.arena}\n[Password]: ${arena.password}\n\n-----------------------------------------`);
+        });
       } else {
         message.channel.send('To use the <arena> command, type: !smash arena [ID] [Password]');
       }
