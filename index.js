@@ -59,10 +59,14 @@ bot.on('message', function(message){
       } else if (userMessage.length == 3 && userMessage[2] != 'show' && userMessage[2].length == 5) {
         message.channel.send('No password detected! If you wish to not have a password, enter \'open\' as your [Password]');
       } else if (userMessage.length == 3 && userMessage[2] == 'show') { // Show current arenas
-        message.channel.send('Current arena(s) open:');
-        arenas.map(currentArena => {
-          message.channel.send(`\n${currentArena.user}'s arena:\n\n[ArenaID]: ${currentArena.arena}\n[Password]: ${currentArena.password}\n\n-----------------------------------------`);
-        });
+        if (arenas.length == 0) {
+          message.channel.send(`No arenas open at the moment. Feel free to create one`)
+        } else {
+          message.channel.send('Current arena(s) open:');
+          arenas.map(currentArena => {
+            message.channel.send(`\n${currentArena.user}'s arena:\n\n[ArenaID]: ${currentArena.arena}\n[Password]: ${currentArena.password}\n\n-----------------------------------------`);
+          });
+        }
       } else {
         message.channel.send('To use the <arena> command, type: !smash arena [ID] [Password]');
       }
