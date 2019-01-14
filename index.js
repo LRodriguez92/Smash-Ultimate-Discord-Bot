@@ -1,16 +1,18 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
+const specialChar = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 
 
-bot.on('message', function(message, arendaId, password){
+bot.on('message', function(message){
   const messageUser = message.member.user.username;
   let userMessage = message.content.split(' ')
   let callSmashBot = userMessage[0];
   let command = userMessage[1];
 
   if (callSmashBot.toLowerCase() == '!smash') {
-    if (userMessage.length >= 2) { // Detects command input after calling smash bot
+    if (userMessage.length >= 2) {
+      // Insert command functions here
       arenaCommand();
     } else {
       // if message is only '!smash' respond with instructions on how to use smash bot
@@ -24,12 +26,15 @@ bot.on('message', function(message, arendaId, password){
       if (userMessage.length == 4) {
         arena = userMessage[2];
         pw = userMessage[3];
-        // if (arena.length > 5) {
-        //   message.channel.send(`You didn't use enough characters in your arena [ID] dufus`);
-        // } else if (arena.length < 5) {
-        //   message.channel.send(`Too many characters in your arena [ID] bozo`);
-        // }
-        message.channel.send(`Arena created!\nArenaID: ${arena}\nPassword: ${pw}`);
+        if (arena.length > 5) {
+          message.channel.send(`Invalid Arend [ID]! Too many characters`);
+        } else if (arena.length < 5) {
+          message.channel.send(`Invalid Arena [ID]! Not enough characters`);
+        } else if (specialChar.test(arena)){
+          message.channel.send(`Invalid Arena [ID]! You know damn well you can't use special characters in an [ID]`)
+        } else {
+          message.channel.send(`Arena created!\nArenaID: ${arena}\nPassword: ${pw}`);
+        }
       } else if (userMessage.length > 4) {
         message.channel.send('Too many values, human! I only need the arena [ID] followed by the [Password] when creating an arena');
       } else if (userMessage.length == 3) {
