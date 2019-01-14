@@ -94,7 +94,7 @@ bot.on('message', function(message){
         }
       }  else {
         // Instructions for arena command
-        message.channel.send('Users can create an arena, view all available arenas, and close their current arena using the <Arena> command. If you already have an arena open and create a new one, your previously created arena will be updated. Below are the [Values] you can use with the <Arena> command, and what they are used for.\n\n__VALUES__                   __RESULT__\n\n[ID][Password] Creates arena\nShow                   Shows all available arenas \nClose                   Closes arena you have created\n\n__Examples__:\n!Smash Arena S2DI4 1234\n!Smash Arena Show\n!Smash Arena Close\n\nP.S. Remember to close your arena when you are done!');
+        message.channel.send('Users can create an arena, view all available arenas, and close their current arena using the <Arena> command. If you already have an arena open and create a new one, your previously created arena will be updated. Below are the [Values] you can use with the <Arena> command, and what they are used for.\n\n__VALUES__                   __RESULT__\n\n[ID][Password] Creates arena\nShow                   Shows all available arenas \nClose                   Closes arena you have created\n\n__Examples__:\n!Smash Arena S2DI4 1234\n!Smash Arena S2DI4 Open (Arenas with no password)\n!Smash Arena Show\n!Smash Arena Close\n\nP.S. Remember to close your arena when you are done!');
       }
     } else {
       message.channel.send(`You fool! The <${command}> command does not exist!`)
