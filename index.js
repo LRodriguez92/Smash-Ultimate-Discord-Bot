@@ -37,7 +37,7 @@ bot.on('message', function(message){
         } else if (specialChar.test(pw) || isNaN(pw)){
           message.channel.send(`Invalid [Password]! Passwords can only be numbers genius!`)
         } else {
-          message.channel.send(`Arena created!\nArenaID: ${arena}\nPassword: ${pw}`);
+          message.channel.send(`\n${messageUser}'s created an arena:\nArenaID: ${arena}\nPassword: ${pw}`);
         }
       } else if (userMessage.length > 4) {
         message.channel.send('Too many values, human! I only need the arena [ID] followed by the [Password] when creating an arena');
