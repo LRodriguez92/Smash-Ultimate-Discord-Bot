@@ -36,7 +36,7 @@ bot.on('message', function(message){
           message.channel.send(`Invalid Arena [ID]! You know damn well you can't use special characters in an [ID].`)
         } else if (password.length > 8){
           message.channel.send(`Invalid [Password]! Passwords can't exceed 8 characters!`);
-        } else if (specialChar.test(password) || isNaN(password)){
+        } else if (specialChar.test(password) || isNaN(password) && password.toLowerCase() != 'none'){
           message.channel.send(`Invalid [Password]! Passwords can only be numbers genius!`)
         } else {
           // Save and create arena info
@@ -64,7 +64,7 @@ bot.on('message', function(message){
         message.channel.send('Too many values, human! I only need the arena [ID] followed by the [Password] when creating an arena.');
       } else if (userMessage.length == 3 && userMessage[2].toLowerCase() != 'show' && userMessage[2] != 'close' && userMessage[2].length == 5) {
         // If the user did not input a password
-        message.channel.send('No password detected! If you wish to not have a password, enter \'open\' as your [Password].');
+        message.channel.send('No password detected! If you wish to not have a password, enter \'None\' as your [Password].');
       } else if (userMessage.length == 3 && userMessage[2].toLowerCase() == 'show') {
         // Show current arenas
         if (arenas.length == 0) {
@@ -94,7 +94,7 @@ bot.on('message', function(message){
         }
       }  else {
         // Instructions for arena command
-        message.channel.send('Users can create an arena, view all available arenas, and close their current arena using the <Arena> command. If you already have an arena open and create a new one, your previously created arena will be updated. Below are the [Values] you can use with the <Arena> command, and what they are used for.\n\n__VALUES__                   __RESULT__\n\n[ID][Password] Creates arena\nShow                   Shows all available arenas \nClose                   Closes arena you have created\n\n__Examples__:\n!Smash Arena S2DI4 1234\n!Smash Arena S2DI4 Open (Arenas with no password)\n!Smash Arena Show\n!Smash Arena Close\n\nP.S. Remember to close your arena when you are done!');
+        message.channel.send('Users can create an arena, view all available arenas, and close their current arena using the <Arena> command. If you already have an arena open and create a new one, your previously created arena will be updated. Below are the [Values] you can use with the <Arena> command, and what they are used for.\n\n__VALUES__                   __RESULT__\n\n[ID][Password] Creates arena\nShow                   Shows all available arenas \nClose                   Closes arena you have created\n\n__Examples__:\n!Smash Arena S2DI4 1234\n!Smash Arena S2DI4 None (Arenas with no password)\n!Smash Arena Show\n!Smash Arena Close\n\nP.S. Remember to close your arena when you are done!');
       }
     } else {
       message.channel.send(`You fool! The <${command}> command does not exist!`)
