@@ -32,6 +32,10 @@ bot.on('message', function(message){
           message.channel.send(`Invalid Arena [ID]! Not enough characters`);
         } else if (specialChar.test(arena)){
           message.channel.send(`Invalid Arena [ID]! You know damn well you can't use special characters in an [ID]`)
+        } else if (pw.length > 8){
+          message.channel.send(`Invalid [Password]! Passwords can't exceed 8 characters!`);
+        } else if (specialChar.test(pw) || isNaN(pw)){
+          message.channel.send(`Invalid [Password]! Passwords can only be numbers genius!`)
         } else {
           message.channel.send(`Arena created!\nArenaID: ${arena}\nPassword: ${pw}`);
         }
