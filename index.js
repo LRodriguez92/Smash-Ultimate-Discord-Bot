@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 const specialChar = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+const arenas = [];
 
 
 bot.on('message', function(message){
@@ -22,22 +23,23 @@ bot.on('message', function(message){
 
   function arenaCommand() {
     if (command.toLowerCase() == 'arena') {
-      let arena, pw;
+      let arena, password;
       if (userMessage.length == 4) {
         arena = userMessage[2];
-        pw = userMessage[3];
+        password = userMessage[3];
         if (arena.length > 5) {
           message.channel.send(`Invalid Arend [ID]! Too many characters`);
         } else if (arena.length < 5) {
           message.channel.send(`Invalid Arena [ID]! Not enough characters`);
         } else if (specialChar.test(arena)){
           message.channel.send(`Invalid Arena [ID]! You know damn well you can't use special characters in an [ID]`)
-        } else if (pw.length > 8){
+        } else if (password.length > 8){
           message.channel.send(`Invalid [Password]! Passwords can't exceed 8 characters!`);
-        } else if (specialChar.test(pw) || isNaN(pw)){
+        } else if (specialChar.test(password) || isNaN(password)){
           message.channel.send(`Invalid [Password]! Passwords can only be numbers genius!`)
         } else {
-          message.channel.send(`\n${messageUser}'s created an arena:\nArenaID: ${arena}\nPassword: ${pw}`);
+          arenas.push({messageUser: {arena: arena, password: password}});
+          message.channel.send(`\n${messageUser}'s created an arena:\n\n[ArenaID]: ${arena}\nPassword: ${password}`);
         }
       } else if (userMessage.length > 4) {
         message.channel.send('Too many values, human! I only need the arena [ID] followed by the [Password] when creating an arena');
