@@ -26,7 +26,7 @@ bot.on('message', function(message){
     if (command.toLowerCase() == 'arena') {
       let arena, password;
       if (userMessage.length == 4) {
-        arena = userMessage[2];
+        arena = userMessage[2].toUpperCase();
         password = userMessage[3];
         if (arena.length > 5) {
           message.channel.send(`Invalid Arend [ID]! Too many characters.`);
