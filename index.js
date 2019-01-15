@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
+require('dotenv').config();
 const bot = new Discord.Client();
-const TOKEN = process.env.TOKEN;
+const SECRET = process.env.SECRET;
 const specialChar = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 const arenas = [];
 
@@ -42,21 +43,26 @@ bot.on('message', function(message){
           // Save and create arena info
           if (arenas.length == 0) {
             arenas.push({user: messageUser, arena: arena, password: password});
-            setInterval(closeArena, 18000000);
+            setInterval(closeArena, 28800000);
             message.channel.send(`\n${messageUser} created an arena:\n\n[Arena ID]: ${arena}\n[Password]: ${password}`);
           } else {
-            arenas.map(currentArena => {
-              if (messageUser == currentArena.user) {
-                currentArena.arena = arena;
-                currentArena.password = password;
-                setInterval(closeArena, 18000000);
+            let update = false;
+            for (let i = 0; i < arenas.length; i++) {
+              if (messageUser == arenas[i].user) {
+                arenas[i].arena = arena;
+                arenas[i].password = password;
+                setInterval(closeArena, 28800000);
                 message.channel.send(`\n${messageUser} updated their arena:\n\n[Arena ID]: ${arena}\n[Password]: ${password}`);
-              } else {
-                arenas.push({user: messageUser, arena: arena, password: password});
-                setInterval(closeArena, 18000000);
-                message.channel.send(`\n${messageUser} created an arena:\n\n[Arena ID]: ${arena}\n[Password]: ${password}`);
+                update = true;
               }
-            });
+            }
+            if (!update) {
+              arenas.push({user: messageUser, arena: arena, password: password});
+              setInterval(closeArena, 28800000);
+              message.channel.send(`\n${messageUser} created an arena:\n\n[Arena ID]:${arena}\n[Password]: ${password}`);
+            } else {
+              return false;
+            }
           }
         }
       } else if (userMessage.length > 4) {
@@ -118,4 +124,4 @@ bot.on('message', function(message){
   }
 });
 
-bot.login(TOKEN);
+bot.login(SECRET);
