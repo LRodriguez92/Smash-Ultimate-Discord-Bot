@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-require('dotenv').config();
+// require('dotenv').config();
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 const specialChar = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
