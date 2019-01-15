@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 require('dotenv').config();
 const bot = new Discord.Client();
-const SECRET = process.env.SECRET;
+const TOKEN = process.env.TOKEN;
 const specialChar = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 const arenas = [];
 
@@ -124,4 +124,4 @@ bot.on('message', function(message){
   }
 });
 
-bot.login(SECRET);
+bot.login(TOKEN);
