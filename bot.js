@@ -68,7 +68,7 @@ bot.on('message', function(message){
       } else if (userMessage.length > 4) {
         // If there are too many values after arena command
         message.channel.send('Too many values, human! I only need the arena [ID] followed by the [Password] when creating an arena.');
-      } else if (userMessage.length == 3 && userMessage[2].toLowerCase() != 'show' && userMessage[2] != 'close' && userMessage[2].length == 5) {
+      } else if (userMessage.length == 3 && userMessage[2].toLowerCase() != 'show' && userMessage[2].toLowerCase() != 'close' && userMessage[2].length == 5) {
         // If the user did not input a password
         message.channel.send('No password detected! If you wish to not have a password, enter \'None\' as your [Password].');
       } else if (userMessage.length == 3 && userMessage[2].toLowerCase() == 'show') {
